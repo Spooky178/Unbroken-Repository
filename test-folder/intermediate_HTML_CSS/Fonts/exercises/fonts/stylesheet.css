@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'Recoleta DEMO';
+    src: url('Recoleta-RegularDEMO.woff2') format('woff2'),
+        url('Recoleta-RegularDEMO.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Storybook';
+    src: url('Storybook.woff2') format('woff2'),
+        url('Storybook.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+

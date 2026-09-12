@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 'Comfortaa';
+    src: url('Comfortaa-Regular.woff2') format('woff2'),
+        url('Comfortaa-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Photography';
+    src: url('PhotographyRegular.woff2') format('woff2'),
+        url('PhotographyRegular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Typewriter_Condensed';
+    src: url('Typewriter_Condensed.woff2') format('woff2'),
+        url('Typewriter_Condensed.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

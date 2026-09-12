@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Object-oriented JavaScript example</title>
+  </head>
+
+  <body>
+    <p>This example requires you to enter commands in your browser's JavaScript console (see <a href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_are_browser_developer_tools">What are browser developer tools</a> for more information).</p>
+
+    <div>
+      <h1>What I learned</h1>
+      <p>
+        I learned to use filter, map, sort and reduce
+    * Filter returns the object or array instance
+    if, return is true and skips on false
+    * Map returns a new array according to function
+    passed in the argument
+    * Sort does what it looks like, it takes a
+    function as a parameter. If return is 1 it
+    is up and -1 is low(please verify this again)
+    * Reduce takes an array(of objects or not)
+    as a parameter. It runs a function with 2
+    arguments - 1. Object(initialized before last
+    bracket) and 2. currentElement
+      </p>
+
+    </div>
+    <script>
+//   ------- Ex 12 ------ //
+//         myArray = [1,2,3,4,5]
+//         const multiply = function(array) {
+//   return array.reduce((a,b)=>{
+//     return a * b
+//   },1);
+// };
+// console.log(multiply(myArray))
+// const factorial = function(number) {
+//   let array = []
+//   for(let i = 1;i<= number;i++){
+//     array.push(i)
+//   }
+//   console.table(array)
+//   return multiply(array)
+// };
+// console.log(factorial(6))
+
+// ------- Ex 13 ------ //
+  //   const palindromes = function (word) {
+  //   let array = Array.from(word);
+  //   let indexArray = []
+  //   // check for punction or space
+  //   array.forEach((element,index) =>{
+  //     if(element === `,` || element === `.` || element === ` `){
+  //     indexArray.push(index)
+  //     }
+  //   })
+  //   // remove punction and space from the array
+  //   if (indexArray.length !== 0){
+  //     for(i=indexArray.length; i>0 ; i--){
+  //       array.splice(indexArray[i-1],1)
+  //     }
+  //     // reassign clean array to word variable, for later comparison
+  //     word = array.join('')
+  //     console.log(word)
+  //   }
+  
+  //   console.log(array)
+
+  //   // reverse and compare
+  //   let reverseWord = array
+  //                       .reverse()
+  //                       .join('')
+  //   return word.toLowerCase() === reverseWord.toLowerCase()
+  // };
+  // // console.log(palindromes('A nut for a jar of tuna.'))
+  // let testRun = palindromes(prompt('If you think its a palindrome, then it is not', `A nut for a jar of tuna.`))
+  // console.log(testRun)
+// ---- Solution
+  // const palindromes = function(string){
+  //   const alphanumerical = `abcdefghijklmnopqrstuvwxyz1234567890`
+  //   const cleanString = string
+  //   .toLowerCase()
+  //   .split(``)
+  //   .filter((element)=> element.includes(alphanumerical))
+  //   .join('');
+  //   const reversedString = cleanString.split(``).reverse().join()
+  //   return reversedString === cleanString 
+  // }
+  // console.log(palindromes('A nut for a jar of tuna.'))
+
+  // ------- Ex 14 ------ //
+   
+    // const fibonacci = function(position){
+    //   const initial = 1
+    //   let array = [initial,initial]
+    //   // array.length = position
+    //   if (position <= 2){
+    //     return initial
+    //   }
+    //   for(let i = 1;i<position-1;i++){
+    //   array.push(array[i-1]+array[i])
+    //   }
+    //   console.table(array)
+    //   return array[position-1]
+    // }
+    
+    // console.log(fibonacci(prompt('Enter a number ONLY', 5)))
+
+    // ------- Ex 15 ------ //
+//       const books = [
+//   {
+//     title: 'Book',
+//     author: 'Name'
+//   },
+//   {
+//     title: 'Book2',
+//     author: 'Name2'
+//   }
+// ]
+// const getTheTitles = function(books) {
+//     const titleArray = books.map(element => element.title)
+//     // add an if condition to check whether element.title is empty, alert a message of element Index empty
+//     return titleArray
+// };
+// console.log(getTheTitles(books))
+
+  // ----- Ex 16 ----- //
+  const person = [
+  {
+    name: "Alice Johnson",
+    yearOfBirth: 1990,
+    yearOfDeath: NaN
+  },
+  {
+    name: "Benjamin Smith",
+    yearOfBirth: 1945,
+    yearOfDeath: 2012
+  },
+  {
+    name: "Clara Oswald",
+    yearOfBirth: 1986,
+    yearOfDeath: NaN
+  },
+  {
+    name: "David Miller",
+    yearOfBirth: 1920,
+    yearOfDeath: 1998
+  },
+  {
+    name: "Elena Rostova",
+    yearOfBirth: 2001,
+    yearOfDeath: NaN
+  },
+  {
+    name: "Frank Sinatra",
+    yearOfBirth: 1915,
+    yearOfDeath: 1998
+  },
+  {
+    name: "Grace Hopper",
+    yearOfBirth: 1906,
+    yearOfDeath: 1992
+  },
+  {
+    name: "Isaac Newton",
+    yearOfBirth: 1643,
+    yearOfDeath: 1727
+  },
+  {
+    name: "Jane Doe",
+    yearOfBirth: 1995,
+    yearOfDeath: NaN
+  },
+  {
+    name: "Marcus Aurelius",
+    yearOfBirth: 121,
+    yearOfDeath: 180
+  }
+];
+
+// calculate age seperately to avoid redundency
+function calcAge(birth, end){
+  const currentDate = new Date().getFullYear();
+        let age;
+        // console.log(`End : ${end}`)
+        if(!end){
+            end = currentDate
+        }
+        age = end - birth
+        // console.log(`Age ; ${age}`)
+        return age
+}
+const findTheOldest = function(arrrayOfObj) {
+  let oldestAge = arrrayOfObj.reduce(function(obj, index) {
+      // If obj is empty, assign it to first element of array
+        if(!obj.name){
+            obj = index
+        } else {
+          const indexAge = calcAge(index.yearOfBirth, index.yearOfDeath)
+          const objAge = calcAge(obj.yearOfBirth, obj.yearOfDeath)
+          // console.log(`Index ${indexAge} :: Obj ${objAge}`)
+          if (indexAge > objAge){
+            obj = index
+          }
+        }
+      return obj
+    },{});
+    // What could reduce be used for?
+    // - Calc age
+    // - Assign the total/obj argument to be the highest value
+    // - Compare the index to total/obj, and store or dismiss accordingly
+    // - Return the object with the highest value, NOT the value in of itself
+    return oldestAge
+};
+console.table(findTheOldest(person))
+    </script>
+  </body>
+
+</html>

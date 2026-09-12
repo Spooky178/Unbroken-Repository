@@ -1,0 +1,39 @@
+.containertwo{
+    display: flex ;
+    flex :wrap;
+    align-items: flex-end;
+    width :150px;
+    border : 2px solid black;
+    padding :2px;
+    border-radius: 8px;
+    background :purple;
+}
+
+.containertwo:hover{
+    background: plum;
+}
+
+.recipe{
+    width :auto;
+    padding:5px;
+    border :2px solid black;
+    margin :2px 2px;
+    color :white;
+    text-align: center;
+}
+
+
+.container {
+  height: 140px;
+  padding: 16px;
+  background: plum;
+  border: 4px solid indigo;
+  display: flex;
+}
+
+.item {
+  width: 60px;
+  height: 60px;
+  border: 4px solid darkslategray;
+  background: skyblue;
+}

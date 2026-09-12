@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Object-oriented JavaScript example</title>
+  </head>
+
+  <body>
+    <p>This example requires you to enter commands in your browser's JavaScript console (see <a href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_are_browser_developer_tools">What are browser developer tools</a> for more information).</p>
+    
+    <script>
+let john = { name: "John", surname: "Smith", id: 1 };
+let pete = { name: "Pete", surname: "Hunt", id: 2 };
+let mary = { name: "Mary", surname: "Key", id: 3 };
+
+let users = [ john, pete, mary ];
+
+let usersMapped = users.map(function(element){
+    element[`fullName`] = `${element.name} ${element.surname}` 
+    return({fullName : element.fullName, id : element.id})
+})
+// names.map(name => ({ user: name }));
+
+/*
+usersMapped = [
+  { fullName: "John Smith", id: 1 },
+  { fullName: "Pete Hunt", id: 2 },
+  { fullName: "Mary Key", id: 3 }
+]
+  map(func) – creates a new array from results of calling func for every element.
+*/
+
+alert( usersMapped[0].id ) // 1
+alert( usersMapped[0].fullName ) // John Smith
+console.log(usersMapped)
+    </script>
+  </body>
+
+</html>

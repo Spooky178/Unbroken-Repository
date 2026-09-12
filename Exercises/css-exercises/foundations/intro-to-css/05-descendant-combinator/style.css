@@ -1,0 +1,17 @@
+/* Add CSS Styling */
+div .text {
+        text-align: center;
+    }
+
+.container p {
+    color :red;
+}
+
+/* Comment of the code above */
+/* The order matter when applying styles */
+/* p .container does not work */
+
+.container .text {
+    background-color: yellow;
+    font-size: 20px;
+}

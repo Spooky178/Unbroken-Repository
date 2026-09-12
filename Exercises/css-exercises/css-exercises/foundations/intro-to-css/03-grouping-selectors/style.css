@@ -1,0 +1,16 @@
+/* a font size of 28px and a list of fonts containing */
+/* `Helvetica` and `Times New Roman`, with `sans-serif` as a fallback */
+.click{
+        font-size: 28px;
+        font-family: 'Helvetica', 'Times New Roman', sans-serif;
+}
+    
+    /* a black background and white text */
+.positive{
+    background-color: blue;
+    color: rgb(170, 230, 248);
+    }
+/* a yellow background */
+.negative{
+    background-color: red;
+    }

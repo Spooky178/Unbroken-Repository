@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Page</title>
+    <!-- Link to external CSS stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="column-left">
+        <img id="background-mountains" src="./Img/luise-and-nic-YHkx_Wf1tTw-unsplash.jpg" alt="Mountain Background">
+        <div id="logo-container">
+            <img id="odin-logo" src="./Img/odin-lined.png" alt="Odin Logo">
+            <p class="logo-text">ODIN</p>
+        </div>
+        <p>Photo by <a href="https://unsplash.com/@lui_and_nic?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Luise and Nic</a> on <a href="https://unsplash.com/photos/silhouetted-mountains-above-calm-sea-YHkx_Wf1tTw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></p>
+    </div>
+    <div id="column-right">
+        <div class="header container">
+            <p>This is not a real online service! You know you need something like this in you life to help you realize your deepest dreams. Sign up <em>now</em> to get started.</p>
+
+        </div>
+        <form>
+            <fieldset class="body container">
+                <legend>Let's do this!</legend>
+                <div class="form-column left">
+                    <label for="first-name">FIRST NAME</label>
+                    <input type="text" id="first-name" name="first-name"
+                    minlength="3"
+                    maxlength="12"
+                    pattern="[A-Za-z\s]+" >
+                    <span class="error-message">Between 3 and 12 characters</span>
+                    <label for="email">EMAIL</label>
+                    <input type="email" id="email" name="email">
+                    <span class="error-message">Must contain -> @</span>
+
+                    <label for="password">PASSWORD</label>
+                    <input type="password" id="password" name="password">
+                </div>
+                <div class="form-column right">
+                    <label for="last-name">LAST NAME</label>
+                    <input type="text" id="last-name" name="last-name"
+                    minlength="3"
+                    maxlength="12"
+                    pattern="[A-Za-z\s]+">
+                    <span class="error-message">Between 3 and 12 characters</span>
+
+                    <label for="phone-number">PHONE NUMBER</label>
+                    <input type="tel" id="phone-number" name="phone-number"
+                    minlength="8"
+                    maxlength="8"
+                    pattern="[0-9]+">
+                    <span class="error-message">Eight digit number</span>
+                    
+                    <label for="confirm-password">CONFIRM PASSWORD</label>
+                    <input type="password" id="confirm-password" name="confirm-password">
+                </div>
+
+            </fieldset>
+            <div class="footer container">
+                <button type="submit" id="submit">Create Account</button>
+                <p>Already have an account? <a id="log-in"
+                    href="###">Log in</a></p>
+            </div>
+        </form>
+    </div>
+    <!-- Link to external JavaScript file placed before the closing body tag -->
+    <script src="script.js"></script>
+</body>

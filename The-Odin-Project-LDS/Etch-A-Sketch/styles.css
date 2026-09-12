@@ -1,0 +1,35 @@
+body{
+    margin:0px;
+    padding:0px;
+}
+div{
+    margin : 0px;
+    padding: 0px;
+}
+.container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* NavBar */
+.navBar{
+    display :flex;
+    justify-content: center;
+    align-items: center;
+    gap :20px;
+    height: 80px;
+    background-color: rgb(111, 187, 197);
+    margin :0px;
+    padding :0px;
+}
+.input{
+    width :120x;
+    height: 60px;
+    border-radius: 12px;
+}
+.button{
+    width:75px;
+    height: 60px;
+    border-radius: 12px;
+}
+

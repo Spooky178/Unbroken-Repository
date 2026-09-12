@@ -1,0 +1,29 @@
+/* input{
+    appearance:none;
+
+} */
+input[type="checkbox"] {
+    appearance: none;
+    position: relative;
+    width:1em;
+    height: 1em;
+    border: 1px solid grey;
+    vertical-align: -2px;
+    color:blue;
+}
+input[type="checkbox"]:before {
+    content: "✔";
+    position: absolute;
+    font-size: 1.2em;
+    right: -1px;
+    top: -0.3em;
+    visibility: hidden;
+}
+input[type="checkbox"]:checked:before {
+    visibility: visible;
+}
+input[type="checkbox"]:disabled {
+    background: #dddddd;
+    border-color: black;
+    color:gray;
+}

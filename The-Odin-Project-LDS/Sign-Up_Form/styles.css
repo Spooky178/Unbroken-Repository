@@ -1,0 +1,297 @@
+/*
+    Josh's Custom CSS Reset
+    https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+*:not(dialog) {
+    margin: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        interpolate-size: allow-keywords;
+    }
+}
+
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  /* added system fonts */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+}
+
+input, button, textarea, select {
+    font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+}
+
+p {
+    text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+}
+
+#root, #__next {
+    isolation: isolate;
+}
+
+/* 
+Write your code below
+======================= 
+*/
+/* Fonts */
+@font-face {
+    font-family: 'Comfortaa';
+    src: url('./Fonts/Comfortaa-Regular.woff') format('woff2'),
+        url('./Fonts/Comfortaa-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Photography';
+    src: url('./Fonts/PhotographyRegular.woff2') format('woff2'),
+        url('./Fonts/PhotographyRegular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Typewriter';
+    src: url('./Fonts/Typewriter_Condensed.woff2') format('woff2'),
+        url('./Fonts/Typewriter_Condensed.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Sketch Gothic';
+    src: url('./Fonts/SketchGothicSchool-Regular.woff2') format('woff2'),
+        url('./Fonts/SketchGothicSchool-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+/* ------------PLACING MAIN BRICKS---------- */
+div{
+    /* border :2px solid black; */
+}
+body{
+    font-size:18px;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    background-color: rgb(27, 32, 17);
+}
+#column-left{
+    width: 25%;
+    background-color: #f0f0f0;
+
+    position:relative;
+}
+#column-right{
+    width: 40%;
+    background-color: #ffffff;
+
+    display:flex;
+    flex-direction: column;
+
+    padding-top: 4rem;
+    padding-bottom:3rem;
+}
+#logo-container{
+    width: 100%;
+    height:10rem;
+    background-color: #77777756;
+
+    position:absolute;
+    top:30%;
+
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#column-right > div{
+    width: 100%;
+    /* border:1px solid blue; */
+}
+/* Added a form element */
+form{
+    display:flex;
+    flex-direction: column;
+    flex:2; 
+}
+.header, .footer{
+    flex:1;
+}
+.body{
+    flex:1.1;
+}
+
+/* ---------FILLING THINGS UP-------- */
+
+/* Left Column */
+#background-mountains{
+    height: 100%;
+    /* object-fit: cover; */
+}
+
+#odin-logo{
+    height:80%;
+}
+.logo-text{
+    font-family: 'Sketch Gothic', sans-serif;
+    width: fit-content;
+    height: fit-content;
+    font-size:calc(24px + 2.4vw)
+}
+
+#column-left > p{
+    position:absolute;
+    bottom:20px;
+    width:80%;
+    margin-left:10%;
+
+    font-family:'Comrfortaa';
+    font-size:1.2em;
+    
+    > a{
+        color:white;
+    }
+}
+
+/* Right Column */
+.container{
+    padding-left:18px;
+}
+
+#column-right{
+    background-color:rgb(238, 238, 238);
+}
+.body{
+    background-color:#ffffff;
+    box-shadow:0 5px 10px rgba(0, 0, 0, 0.432);
+}
+
+/* Styling form and elements */
+fieldset{
+    border:none;
+    display:flex;
+    padding-left:12px;
+    padding-right:min(24px, 5vw);
+    font-family:'Comfortaa', sans-serif;
+}
+legend{
+    font-family:inherit;
+    font-size:2em;
+    font-weight:bolder;
+}
+.form-column{
+    flex:1;
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.form-column > input,
+.form-column > label{
+    font-family:inherit;
+    font-weight: bold;
+    letter-spacing:1.5px;
+}
+
+.form-column > input{
+    border:1px solid #77777756;
+    border-radius:5px;
+    width:min(250px, 90%);
+
+    margin-bottom: 6px;
+}
+
+/* Styling header and footer */
+.header p{
+    font-family:"Typewriter", sans-serif;
+    font-size:2rem;
+    font-weight:500;
+    letter-spacing:-1px;
+    line-height: 1.2;
+}
+
+.footer p{
+    font-family: sans-serif;
+}
+.footer a{
+    color:rgb(11, 122, 11);
+    font-family:'Comfortaa';
+}
+button[type="submit"]{
+    border:none;
+    border-radius:5px;
+    background-color:rgb(11, 122, 11);
+    color:#ffffff;
+
+    font-size:1.5em;
+    font-family:sans-serif;
+    font-weight: bold;
+
+    width:10em;
+    height:2em;
+
+    margin-top:20px;
+    margin-bottom:12px;
+    box-shadow:0 0 5px rgba(0, 0, 0, 0.719);
+
+/* playing around with transitions */
+    transition: 0.4s all;
+}
+
+/* Styling pseudo-classes */
+
+.form-column > input:focus{
+outline:1px solid teal;
+}
+
+.form-column > input:user-invalid{
+    outline:1px solid red;
+}
+.form-column > input:user-valid{
+    outline:1px solid rgb(11, 122, 11);
+}
+
+button[type='submit']:hover{
+    background-color :rgba(11, 122, 11, 0.8);
+    transform:scale(1.05);
+    transition: 0.4s all;
+}
+a[id='log-in']:hover{
+    color :rgba(11, 122, 11, 0.6);
+}
+
+/* testing error messages by nesting selectors */
+/* use next sibling seletor + to access color of next span sibling */
+.error-message{
+    font-size:0.5em;
+    color:red;
+    visibility: hidden
+}
+
+.form-column > input:user-invalid{
+    + span{
+        visibility:visible;
+    }
+}

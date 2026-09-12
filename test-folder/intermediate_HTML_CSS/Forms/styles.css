@@ -1,0 +1,158 @@
+/*
+  Josh's Custom CSS Reset
+  https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* *:not(dialog) {
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+p {
+  text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+#root, #__next {
+  isolation: isolate;
+} */
+
+/* 
+Write your code below
+======================= 
+*/
+/* Font Faces */
+@font-face {
+    font-family: 'journal';
+    src: url('./fonts/Journal.woff') format('woff2'),
+        url('./fonts/Journal.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'typewriter';
+    src: url('./fonts/VeteranTypewriter.woff') format('woff2'),
+        url('./fonts/VeteranTypewriter.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+body{
+    font:1.3rem sans-serif;
+    width:740px;
+    height:498px;
+    margin:0;
+    background:#222222;
+}
+form{
+    position:relative;
+    width:740px;
+    height:498px;
+    margin:0 auto;
+    padding:1em;    
+    background:white url(./background.jpg);
+    /* background-repeat: no-repeat; */
+
+    /* Setting up grids */
+    /* did not understand much of what happened here, tried tweaking */
+    display:grid;
+    gap:20px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 10em 1em 1em 1em;
+}
+h1{
+    font:
+    1em "typewriter",
+    monospace;
+    align-self:end;
+}
+#message{
+    grid-row:1/5;
+}
+#from,
+#reply{
+    display:flex;
+}
+label{
+    font:0.8em 'typewriter',
+    sans-serif;
+}
+input,textarea{
+    font:
+    1.4em/1.5em "journal",
+    cursive,
+    sans-serif;
+    border:none;
+    padding:0 10px;
+    margin:0;
+    width:80%;
+    background:none;
+}
+input:focus, 
+textarea:focus{
+    background:rgb(0 0 0 / 10%);
+    border-radius:5px;
+}
+
+textarea{
+    display:block;
+    padding:10px;
+    margin:10px 0 0 -10px;
+    width:100%;
+    height:90%;
+
+    border-right:2px solid rgba(0, 0, 0, 0.8);
+    border-start-end-radius: 15px;
+    border-end-end-radius: 15px;
+
+    overflow:auto;
+}
+button{
+    padding:5px;
+    font:font 0.6em sans-serif;
+    border:2px solid #333333;
+    border-radius:5px;
+    background:none;
+    cursor:pointer;
+    transform:rotate(-1.5deg);
+}
+button::before{
+    content:">>>";
+}
+button:hover,
+button:focus{
+    background:rgb(0 0 0/40%);
+    color:white;
+}
