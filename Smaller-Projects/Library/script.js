@@ -52,6 +52,7 @@ function createBookDisplay(book){
     card.appendChild(headerId)
     card.appendChild(container)
     const bodyContainer = document.querySelector(`#body`)
+    // execpt for the constant above, all elements of this function have been created
     bodyContainer.appendChild(card)
 
     let para = [cardParaMaker(), cardParaMaker(), cardParaMaker(), cardParaMaker()]
@@ -67,4 +68,40 @@ function cardParaMaker(){
     const p = document.createElement(`p`)
     p.setAttribute(`class`,`card-content`)
     return p
+}
+
+const dialogBox = document.getElementById(`new-book-dialog`)
+const submitButton = dialogBox.querySelector(`#submit-btn`)
+
+
+
+dialogBox.addEventListener(`close`, (e) => {
+    console.log(`Returned Value ${dialogBox.returnValue}`)
+})
+
+submitButton.addEventListener(`click`, function(event){
+    event.preventDefault()
+
+    let addBook = new Book(
+        dialogBox.querySelector(`#title`), 
+        dialogBox.querySelector(`#author`), 
+        dialogBox.querySelector(`#page-count`),
+        dialogBox.querySelector(`#isRead`)
+    )
+    if(checkInputFill(addBook)){
+        dialogBox.close()
+    }
+    
+
+    
+})
+
+function checkInputFill(obj){
+    isFill = true
+    for (const prop in obj){
+        if(obj[prop].value === ""){
+            isFill = false
+        }
+    }
+    return isFill
 }

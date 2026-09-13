@@ -10,19 +10,33 @@
 <body>
     <div class="super-container">
         <div id="navbar">
-            <form method="get" action="###">
-                <button type="submit">Post</button>
-                <label for="title">Title</label>
-                <input name="title" id="title" />
-                <label for="author">Author</label>
-                <input name="author" id="author" />
-                <label for="page-count">How many pages</label>
-                <input name="page-count" id="page-count" />
-                <label for="read">Is it read yet</label>
-                <input type="checkbox" name="read" id="read" />
-            </form>
         </div>
         <div id="body">
+
+            <button command="show-modal" commandfor="new-book-dialog">Open dialog</button>
+            <dialog id="new-book-dialog">
+                <form method="dialog">
+                    <p>
+                        <label for="title">Title</label>
+                        <input name="title" id="title" />
+                    </p>
+                    <p>
+                        <label for="author">Author</label>
+                        <input name="author" id="author" />
+                    </p>
+                    <p>
+                        <label for="page-count">How many pages</label>
+                        <input name="page-count" id="page-count" />
+                    </p>
+                    <p>
+                        <label for="isRead">Is it read yet</label>
+                        <input type="checkbox" name="isRead" id="isRead" />
+                    </p>
+
+                    <button id='submit-btn'>Submit</button>
+                </form>
+                <button commandfor="new-book-dialog" command="close">Close</button>
+            </dialog>
 
         </div>
     </div>
