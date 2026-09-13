@@ -52,3 +52,22 @@ h1, h2, h3, h4, h5, h6 {
 Write your code below
 ======================= 
 */
+body{
+  height: 98vh;
+}
+.book-holder{
+  width: 60px;
+  height: 60px;
+  display:flex;
+  flex-direction:column;
+
+}
+
+.super-container{
+  display:grid;
+  grid-template-rows: 1fr 6fr;
+  height: 100%;
+}
+#navbar, #body{
+  border:1px solid black;
+}
