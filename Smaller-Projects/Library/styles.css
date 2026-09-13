@@ -56,8 +56,6 @@ body{
   height: 98vh;
 }
 .book-holder{
-  width: 60px;
-  height: 60px;
   display:flex;
   flex-direction:column;
 
@@ -70,4 +68,40 @@ body{
 }
 #navbar, #body{
   border:1px solid black;
+}
+#body{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+  padding:max(3vw,30px);
+  gap:max(1.5vw,15px);
+}
+#add-book-btn{
+  position: absolute;
+  bottom:12vh;
+  right:4vh;
+
+  width:60px;
+  height:60px;
+
+  background-color:teal;
+  color:white;
+  border-radius:50%;
+  border:none;
+
+  font-size:2em;
+  font-weight: 600;
+}
+.card{
+
+  >h2{
+    display: flex;
+    justify-content: center;
+  }
+    .delete{
+      width:60px;
+      height: 40px;
+      align-self:end;
+  }
+
 }

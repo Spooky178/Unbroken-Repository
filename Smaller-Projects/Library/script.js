@@ -1,3 +1,6 @@
+        // ------ GLOBAL VARIABLES ------ //
+let deleteBtn;
+
 function Book(title, author, pageCount, isRead){
     this.title = title;
     this.author = author;
@@ -18,6 +21,8 @@ function addBookToLibrary(title,author,pageCount,isRead){
     }while(isIdUnique(myLibrary, id) === false)
     myBook[`id`] = id
     myLibrary.push(myBook)
+    createBookDisplay(myBook)
+    deleteBtn = document.querySelectorAll(`.delete`)
 
 }
 
@@ -60,8 +65,14 @@ function createBookDisplay(book){
     para[0].textContent = `Title : ${book.title}`
     para[1].textContent = `Author : ${book.author}`
     para[2].textContent = `Pages : ${book.pageCount}`
-    para[3].textContent = `Status : ${book.isRead}`
+    para[3].textContent = `Status : ${book.isRead?`Read`:`Not read`}`
     para.forEach((element) => container.appendChild(element));
+
+    const deleteBtn = document.createElement(`button`)
+    deleteBtn.setAttribute(`class`,`delete`)
+    deleteBtn.setAttribute(`data-id`,book.id)
+    deleteBtn.textContent = `-`
+    container.appendChild(deleteBtn)
 
 }
 function cardParaMaker(){
@@ -76,7 +87,7 @@ const submitButton = dialogBox.querySelector(`#submit-btn`)
 
 
 dialogBox.addEventListener(`close`, (e) => {
-    console.log(`Returned Value ${dialogBox.returnValue}`)
+    document.getElementById(`new-book-form`).reset()
 })
 
 submitButton.addEventListener(`click`, function(event){
@@ -89,11 +100,15 @@ submitButton.addEventListener(`click`, function(event){
         dialogBox.querySelector(`#isRead`)
     )
     if(checkInputFill(addBook)){
+        addBookToLibrary(
+            addBook.title.value,
+            addBook.author.value,
+            addBook.pageCount.value,
+            addBook.isRead.checked
+        )
+        
         dialogBox.close()
     }
-    
-
-    
 })
 
 function checkInputFill(obj){
@@ -105,3 +120,28 @@ function checkInputFill(obj){
     }
     return isFill
 }
+
+
+deleteBtn.forEach((currentButton, index) => {
+    currentButton.addEventListener(`click`, function () {
+        alert(`working`)
+        console.log(currentButton)
+    })
+})
+
+// delete button logic
+
+// let deleteButton = document.querySelectorAll(`.delete`)
+// deleteButton.forEach((currentButton,index)=> {
+//     currentButton.addEventListener(`click`, function () {
+//         console.log(currentButton)
+//         console.log(currentButton.dataset.id)
+//         const index = myLibrary.findIndex((element) => {
+//             element.id === currentButton.dataset.id
+//             console.log(index)
+//         })
+
+//     })
+// })
+
+
