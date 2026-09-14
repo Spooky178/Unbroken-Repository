@@ -148,21 +148,87 @@ body{
 
     letter-spacing: 1.7px;
   }
-  /* delete button */
-    .delete{
+  
+}
+
+.card-button-bar{
+  display:flex;
+  gap:50%;
+  padding:2% 10%;
+  .delete, .toggle{
       width:60px;
       height: 40px;
-      align-self:end;
-
-      border:1px solid #ffb7a2d8;
       border-radius:10px;
+      border:1px solid var(--grey-blue);
 
+  }
+
+  /* delete button */
+    .delete{
       background-color:#ffd5c1de;
   }
   .delete:hover{
       background-color:#f5693fe1;
       transition: all 0.4s;
+      border:1px solid #f5693fab;
+
 
   }
+  /* toggle button */
+  .toggle{
+  background-color:#D0E8F2;
 
+  }
+  .toggle:hover{
+  background-color:#ffffffde;
+      border:1px solid #dadadade;
+
+  }
 }
+
+dialog{
+  
+
+  height: 40vh;
+  width:30vw;
+  background-color: #ffffff;
+  outline:12px ridge var(--grey-blue);
+  border:none;
+  > form{
+      height:100%;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(4, 1fr);
+      align-items: center;
+      justify-content: start;
+      padding:1% 6%;
+
+      font-size:1em; 
+
+      > p{
+        display:flex;
+        
+      }
+      & label{
+        flex-grow:1;
+        flex-basis:35%;
+      }
+      & input{
+        flex-grow:1;
+        width:65%;
+        border-radius:10px;
+        flex-basis:60%;
+      }
+      & input[type="checkbox"]{
+        transform:scale(1);
+      }
+  }
+}
+.form-button-bar{
+  display: flex;
+  gap:1.5vw;
+  > button{
+    flex-basis:50%;
+  }
+}
+
