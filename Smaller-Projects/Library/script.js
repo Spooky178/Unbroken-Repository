@@ -1,31 +1,14 @@
         // ------ GLOBAL VARIABLES ------ //
 let deleteBtn;
-
-function Book(title, author, pageCount, isRead){
-    this.title = title;
-    this.author = author;
-    this.pageCount = pageCount
-    this.isRead = isRead;
-    this.info = function(){
-        return(`${this.title} by ${this.author}, ${this.pageCount} pages, ` + (this.isRead?'already read':`not read yet`))
-    }
-}
-
 const myLibrary =[]
-function addBookToLibrary(title,author,pageCount,isRead){
-    let myBook = new Book(title,author,pageCount,isRead)
-    let id;
-    // enters the loop once and verify if unique
-    do{
-        id = idGenerator()
-    }while(isIdUnique(myLibrary, id) === false)
-    myBook[`id`] = id
-    myLibrary.push(myBook)
-    createBookDisplay(myBook)
-    deleteBtn = document.querySelectorAll(`.delete`)
+const dialogBox = document.getElementById(`new-book-dialog`)
+const submitButton = dialogBox.querySelector(`#submit-btn`)
+const bodyContainer = document.querySelector(`#body`)
+//  Global Variables End <---
 
-}
+        // ------ HELPER FUNCTIONS ----- // 
 
+// ---> addBookToLibrary
 function idGenerator(){
     // spliting to obtain a 4 digit number
     let uuid = crypto.randomUUID().split('-')
@@ -40,9 +23,63 @@ function isIdUnique(array, uuid){
     let isUnique = !array.some(book => { 
         book.id === uuid
     })
-    return isUnique
-    
+    return isUnique   
 }
+
+// ---> createBookDisplay
+function cardParaMaker(){
+    const p = document.createElement(`p`)
+    p.setAttribute(`class`,`card-content`)
+    return p
+}
+
+// ---> Submit Button
+function checkInputFill(obj){
+    isFill = true
+    for (const prop in obj){
+        if(obj[prop].value === ""){
+            isFill = false
+        }
+    }
+    return isFill
+}
+
+// ---> Delete Button
+function libraryPop(uuid){
+    index = myLibrary.findIndex(book => book.id === uuid)
+    myLibrary.pop(index)
+}
+function cardPop(uuid){
+    const card = document.getElementById(uuid)
+    card.remove()
+}
+//Helper Functions End <---
+
+// ----- MAIN FUNCTION -----//
+// Book Constructor
+function Book(title, author, pageCount, isRead){
+    this.title = title;
+    this.author = author;
+    this.pageCount = pageCount
+    this.isRead = isRead;
+    this.info = function(){
+        return(`${this.title} by ${this.author}, ${this.pageCount} pages, ` + (this.isRead?'already read':`not read yet`))
+    }
+}
+function addBookToLibrary(title,author,pageCount,isRead){
+    let myBook = new Book(title,author,pageCount,isRead)
+    let id;
+    // enters the loop once and verify if unique
+    do{
+        id = idGenerator()
+    }while(isIdUnique(myLibrary, id) === false)
+    myBook[`id`] = id
+    myLibrary.push(myBook)
+    createBookDisplay(myBook)
+    deleteBtn = document.querySelectorAll(`.delete`)
+
+}
+// Rework this part of code BELOW
 function createBookDisplay(book){
     const card = document.createElement('div')
     card.setAttribute(`class`,`card`)
@@ -50,13 +87,11 @@ function createBookDisplay(book){
 
     const container = document.createElement(`div`)
     container.setAttribute(`class`,`book-holder`)
-    container.style.border = `1px solid black`
     const headerId = document.createElement(`h2`)
     headerId.textContent = book.id
 
     card.appendChild(headerId)
     card.appendChild(container)
-    const bodyContainer = document.querySelector(`#body`)
     // execpt for the constant above, all elements of this function have been created
     bodyContainer.appendChild(card)
 
@@ -75,21 +110,36 @@ function createBookDisplay(book){
     container.appendChild(deleteBtn)
 
 }
-function cardParaMaker(){
-    const p = document.createElement(`p`)
-    p.setAttribute(`class`,`card-content`)
-    return p
-}
-
-const dialogBox = document.getElementById(`new-book-dialog`)
-const submitButton = dialogBox.querySelector(`#submit-btn`)
 
 
+// Buttons does work, event listeners do not fire everytime a button is created
+// They are not captured by ^ those
+// Event Delegation is the key, implementation below doesn't work > WHY?
+// Because a new event listeners are fired each time body is clicked
+            // bodyContainer.addEventListener(`mousedown`,function(){
+            //     deleteBtn.forEach((currentButton, index) => {
+            //     currentButton.addEventListener(`click`, function () {
+            //         some code here
+            //     })
+            // })
+            // })
 
+// Toggle read Button
+bodyContainer.addEventListener("click",(event)=>{
+    const toggleReadbtn = event.target.closest(`.toggle`);
+    if(!deleteBtn)return
+    let uuid = deleteBtn.dataset.id
+    libraryPop(uuid)
+    cardPop(uuid)
+})
+
+
+// ----- EVENT LISTENERS ----- //
+
+// Closing the form reset all the fields
 dialogBox.addEventListener(`close`, (e) => {
     document.getElementById(`new-book-form`).reset()
 })
-
 submitButton.addEventListener(`click`, function(event){
     event.preventDefault()
 
@@ -106,42 +156,17 @@ submitButton.addEventListener(`click`, function(event){
             addBook.pageCount.value,
             addBook.isRead.checked
         )
-        
         dialogBox.close()
     }
 })
 
-function checkInputFill(obj){
-    isFill = true
-    for (const prop in obj){
-        if(obj[prop].value === ""){
-            isFill = false
-        }
-    }
-    return isFill
-}
-
-
-deleteBtn.forEach((currentButton, index) => {
-    currentButton.addEventListener(`click`, function () {
-        alert(`working`)
-        console.log(currentButton)
-    })
+// Delete Button & Event Delegation --> .target is magic
+bodyContainer.addEventListener("click",(event)=>{
+    const deleteBtn = event.target.closest(`.delete`);
+    if(!deleteBtn)return
+    let uuid = deleteBtn.dataset.id
+    libraryPop(uuid)
+    cardPop(uuid)
 })
 
-// delete button logic
-
-// let deleteButton = document.querySelectorAll(`.delete`)
-// deleteButton.forEach((currentButton,index)=> {
-//     currentButton.addEventListener(`click`, function () {
-//         console.log(currentButton)
-//         console.log(currentButton.dataset.id)
-//         const index = myLibrary.findIndex((element) => {
-//             element.id === currentButton.dataset.id
-//             console.log(index)
-//         })
-
-//     })
-// })
-
-
+// Event Listeners End <---

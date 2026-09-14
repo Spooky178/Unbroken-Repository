@@ -52,6 +52,15 @@ h1, h2, h3, h4, h5, h6 {
 Write your code below
 ======================= 
 */
+:root{
+  --ice-packed-blue:#A9C9E9;
+  --ice-baby-blue:#7BC0DF;
+  --grey-blue:rgba(74, 127, 163, 0.89);
+  --shadow-shallow:0 0 12px -5px rgb(0, 0, 0);
+  --shadow-medium:0 0 14px -5px rgb(0, 0, 0);
+  --shadow-deep:0 0 15px -4px rgb(0, 0, 0);
+}
+
 body{
   height: 98vh;
 }
@@ -66,15 +75,23 @@ body{
   grid-template-rows: 1fr 6fr;
   height: 100%;
 }
-#navbar, #body{
-  border:1px solid black;
+#body{
+  box-shadow: inset 0 10px 10px -9px rgba(0, 0, 0, 1);
 }
+#navbar{
+  background-color:var(--grey-blue);
+  box-shadow:0 5px 30px 1px #000000;
+}
+
 #body{
   display:grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 
   padding:max(3vw,30px);
   gap:max(1.5vw,15px);
+
+  background-color:#F8F9FA;
+
 }
 #add-book-btn{
   position: absolute;
@@ -84,24 +101,68 @@ body{
   width:60px;
   height:60px;
 
-  background-color:teal;
+  background-color:rgb(80, 149, 177);
   color:white;
   border-radius:50%;
   border:none;
 
   font-size:2em;
   font-weight: 600;
+  transition: background-color 0.4s;
+  
 }
+#add-book-btn:hover{
+  background-color:#8cc1db;
+  transition:background-color 0.4s;
+
+  
+}
+
 .card{
+  max-width:375px;
+  max-height: fit-content;
+  border-radius: 10px;
+
+  /* background-color:#FFFFFF; */
+  background-color:var(--ice-packed-blue);
+
+  box-shadow:var(--shadow-shallow);
+
+
+  >.book-holder{
+      padding:20px;
+      border-radius:10px;
+      /* background-color:#87CEEB; */
+      background-color:var(--ice-baby-blue);
+
+      box-shadow: 0 0 8px -3px #000000;
+      transform: scale(1.02);
+  }
+  >.book-holder:hover{
+    outline:3px solid #D0E8F2;
+  }
 
   >h2{
     display: flex;
     justify-content: center;
+
+    letter-spacing: 1.7px;
   }
+  /* delete button */
     .delete{
       width:60px;
       height: 40px;
       align-self:end;
+
+      border:1px solid #ffb7a2d8;
+      border-radius:10px;
+
+      background-color:#ffd5c1de;
+  }
+  .delete:hover{
+      background-color:#f5693fe1;
+      transition: all 0.4s;
+
   }
 
 }
