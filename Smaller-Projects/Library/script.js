@@ -1,3 +1,4 @@
+
         // ------ GLOBAL VARIABLES ------ //
 let deleteBtn;
 const myLibrary =[]
@@ -55,6 +56,7 @@ function createReadToggler(isRead,uuid){
     toggler.setAttribute(`class`,`toggle`)
     toggler.setAttribute(`data-state`,checkRead(isRead))
     toggler.setAttribute(`data-id`,uuid)
+    toggler.textContent = ""
     // const svg = document.createElement(`svg`)
     // svg.setAttribute("xmlns", "http://www.w3.org/2000/svg")
     // svg.setAttribute("viewBox", "0 0 24 24")
@@ -76,7 +78,16 @@ function checkInputFill(obj){
     }
     return isFill
 }
-
+function checkFormValidity(inputs){
+    isValid = true
+    inputs.forEach((item, index) => {
+        // item.preventDefault()
+            if(!(item.validity.valid)){
+                isValid=false
+            }
+        })
+    return isValid
+}
 // ---> Delete Button
 function libraryPop(uuid){
     index = myLibrary.findIndex(book => book.id === uuid)
@@ -112,7 +123,7 @@ function addBookToLibrary(title,author,pageCount,isRead){
     deleteBtn = document.querySelectorAll(`.delete`)
 
 }
-// Rework this part of code BELOW
+// Rework this part of code BELOW > done
 function createBookDisplay(book){
     const card = document.createElement('div')
     card.setAttribute(`class`,`card`)
@@ -139,37 +150,46 @@ function createBookDisplay(book){
 
 }
 
-// Toggle read Button
-function displaytoggler(prop){
-    
-}
 // ------------------------------------------------------------
 
 
 // ----- EVENT LISTENERS ----- //
 
-// Closing the form reset all the fields
+// Closing the form reset all the fields and hide spans
 dialogBox.addEventListener(`close`, (e) => {
     document.getElementById(`new-book-form`).reset()
+    const spans = document.querySelectorAll(`span`)
+    spans.forEach((item) => item.style.visibility = "hidden")
 })
 
 submitButton.addEventListener(`click`, function(event){
     event.preventDefault()
-
+    const form = document.querySelector(`form`)
+    const span = form.querySelectorAll(`span`)
+    const input = form.querySelectorAll('input')
     let addBook = new Book(
-        dialogBox.querySelector(`#title`), 
-        dialogBox.querySelector(`#author`), 
-        dialogBox.querySelector(`#page-count`),
-        dialogBox.querySelector(`#isRead`)
+        dialogBox.querySelector(`#title`).value, 
+        dialogBox.querySelector(`#author`).value, 
+        dialogBox.querySelector(`#page-count`).value,
+        dialogBox.querySelector(`#isRead`).checked
     )
-    if(checkInputFill(addBook)){
+    if(checkFormValidity(input) && checkInputFill(addBook)){
         addBookToLibrary(
-            addBook.title.value,
-            addBook.author.value,
-            addBook.pageCount.value,
-            addBook.isRead.checked
+            addBook.title,
+            addBook.author,
+            addBook.pageCount,
+            addBook.isRead
         )
         dialogBox.close()
+    }
+    else {
+        input.forEach((item, index) => {
+            if(!(item.validity.valid)){
+                span[index].style.visibility = `visible`
+            }else{
+                span[index].style.visibility = "hidden"
+            }
+        })
     }
 })
 
@@ -194,7 +214,8 @@ bodyContainer.addEventListener("click",(event)=>{
             array[1] = `Not Read`
         }
         statusPara.textContent = array.join(' : ')
-        
+        // invert read in display - Above
+        // invert read in library - Below
         let index = myLibrary.findIndex(book => book.id === uuid)
         let read = myLibrary[index].isRead
         myLibrary[index].isRead = !read        

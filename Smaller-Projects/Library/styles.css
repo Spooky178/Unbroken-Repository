@@ -52,6 +52,32 @@ h1, h2, h3, h4, h5, h6 {
 Write your code below
 ======================= 
 */
+@font-face {
+    font-family: 'Typewriter';
+    src: url('./Fonts/JMHTypewriter-Regular.woff2') format('woff2'),
+        url('./Fonts/JMHTypewriter-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'd La Cruz';
+    src: url('./Fonts/d-LaCruz.woff2') format('woff2'),
+        url('./Fonts/d-LaCruz.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Lokeya';
+    src: url('./Fonts/Lokeya.woff2') format('woff2'),
+        url('./Fonts/Lokeya.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
 :root{
   --ice-packed-blue:#A9C9E9;
   --ice-baby-blue:#7BC0DF;
@@ -67,7 +93,6 @@ body{
 .book-holder{
   display:flex;
   flex-direction:column;
-
 }
 
 .super-container{
@@ -81,6 +106,13 @@ body{
 #navbar{
   background-color:var(--grey-blue);
   box-shadow:0 5px 30px 1px #000000;
+
+  display:flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Typewriter";
+  font-size:2em;
 }
 
 #body{
@@ -146,22 +178,26 @@ body{
     display: flex;
     justify-content: center;
 
-    letter-spacing: 1.7px;
+    letter-spacing: 8px;
+    font-family:"d La Cruz",sans-serif;
   }
   
 }
-
+.card-content{
+  font-family:'Typewriter';
+  font-size:1.2em;
+}
 .card-button-bar{
   display:flex;
   gap:50%;
   padding:2% 10%;
+  /* ------- */
   .delete, .toggle{
       width:60px;
       height: 40px;
       border-radius:10px;
       border:1px solid var(--grey-blue);
-
-  }
+    }
 
   /* delete button */
     .delete{
@@ -186,41 +222,46 @@ body{
   }
 }
 
-dialog{
-  
-
+dialog {
   height: 40vh;
   width:30vw;
   background-color: #ffffff;
   outline:12px ridge var(--grey-blue);
   border:none;
+
+  font-family:"Lokeya";
+  font-size:1.2em;
+  font-weight:600;
+  letter-spacing: 1.2px;
+
+  /* ----- */
   > form{
       height:100%;
       display: grid;
       grid-template-columns: 1fr;
-      grid-template-rows: repeat(4, 1fr);
+      grid-template-rows: 1fr 0.2fr 1fr 0.2fr 1fr 0.2fr 1fr 1fr;
       align-items: center;
       justify-content: start;
       padding:1% 6%;
 
       font-size:1em; 
-
+    /* -------- */
       > p{
         display:flex;
-        
-      }
-      & label{
-        flex-grow:1;
-        flex-basis:35%;
-      }
-      & input{
-        flex-grow:1;
-        width:65%;
-        border-radius:10px;
-        flex-basis:60%;
-      }
-      & input[type="checkbox"]{
-        transform:scale(1);
+        & label{
+          flex-grow:1;
+          flex-basis:35%;
+        }
+        & input{
+          flex-grow:1;
+          width:65%;
+          border-radius:10px;
+          flex-basis:60%;
+          border:1px solid #dadadade;
+        }
+        & input[type="checkbox"]{
+          transform:scale(1);
+        }
       }
   }
 }
@@ -229,6 +270,34 @@ dialog{
   gap:1.5vw;
   > button{
     flex-basis:50%;
+    border:none;
+    border-radius: 15px;
   }
+  >#submit-btn{
+    color:white;
+    background-color:mediumseagreen;
+  }
+  >#submit-btn:hover, #close-btn:hover{
+    transform: scale(1.1);
+    transition: transform 0.4s;
+  }
+}
+/* form input pseudo classes */
+form{
+    & input:focus{
+      outline:1px solid var(--grey-blue);
+    }
+    & input:user-valid{
+      border:1px solid green;
+    }
+    & input:user-invalid{
+      border:1px solid red;
+    }
+}
+p ~ span{
+  font-size:0.5em;
+  flex-grow:0.4;
+  color:rgba(255, 0, 0, 0.76);
+  visibility: hidden;
 }
 

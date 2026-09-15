@@ -10,6 +10,7 @@
 <body>
     <div class="super-container">
         <div id="navbar">
+            <h1>Library</h1>
         </div>
         <div id="body">
 
@@ -18,23 +19,26 @@
                 <form id="new-book-form" method="dialog">
                     <p>
                         <label for="title">Title</label>
-                        <input name="title" id="title" />
+                        <input name="title" id="title" minlength="3" maxlength="32"/>
                     </p>
+                        <span>Between 3 and 30 characters</span>
                     <p>
                         <label for="author">Author</label>
-                        <input name="author" id="author" />
+                        <input name="author" id="author" minlength="3" maxlength="20"/>
                     </p>
+                        <span>Between 3 and 30 characters</span>
                     <p>
                         <label for="page-count">Total pages</label>
-                        <input name="page-count" id="page-count" />
+                        <input name="page-count" id="page-count" pattern="^[0-9]+$"/>                        
                     </p>
+                        <span>Only numbers</span>
                     <p>
                         <label for="isRead">Is it read yet</label>
                         <input type="checkbox" name="isRead" id="isRead" />
                     </p>
                     <div class="form-button-bar">
                         <button id='submit-btn'>Submit</button>
-                        <button commandfor="new-book-dialog" command="close">Close</button>
+                        <button id="close-btn" commandfor="new-book-dialog" command="close" type="button">Close</button>
                     </div>
                     </form>
             </dialog>

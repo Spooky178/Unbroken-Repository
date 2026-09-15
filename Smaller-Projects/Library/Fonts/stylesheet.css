@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 'JMH Typewriter';
+    src: url('JMHTypewriter-Regular.woff2') format('woff2'),
+        url('JMHTypewriter-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'd La Cruz';
+    src: url('d-LaCruz.woff2') format('woff2'),
+        url('d-LaCruz.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Lokeya';
+    src: url('Lokeya.woff2') format('woff2'),
+        url('Lokeya.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
