@@ -1,53 +1,48 @@
-// Write a constructor for making “Book” objects.
+// Lesson 2
 
-function Book(title, author, pageCount, isRead){
-    this.title = title;
-    this.author = author;
-    this.pageCount = pageCount
-    this.isRead = isRead;
-    this.info = function(){
-        return(`${this.title} by ${this.author}, ${this.pageCount} pages, ` + (this.isRead?'already read':`not read yet`))
-    }
-}
+// factory functions and closure
+// a closure is : the combination of a function and the surrounding state
 
-function Person(name) {
-  this.name = name;
-}
+// function createUser(name) {
+//   const discordName = "@" + name;
 
-Person.prototype.sayName = function() {
-  console.log(`Hello, I'm ${this.name}!`);
-};
+//   let reputation = 0;
+//   const getReputation = () => reputation;
+//   const giveReputation = () => { reputation++; };
 
-function Player(name, marker) {
-  this.name = name;
-  this.marker = marker;
-}
+//   return { name, discordName, getReputation, giveReputation };
+// }
 
-// Don't do this!
-Object.setPrototypeOf(Player.prototype, Person.prototype)
-// Player.prototype = Person.prototype;
+// const josh = createUser("josh");
+// josh.giveReputation();
+// josh.giveReputation();
 
-function Enemy(name) {
-  this.name = name;
-  this.marker = "^";
-}
+// // logs { discordName: "@josh", reputation: 2 }
+// console.log({
+//   discordName: josh.discordName,
+//   reputation: josh.getReputation()
+// });
 
-// Not again!
-Object.setPrototypeOf(Enemy.prototype, Person.prototype)
-// Enemy.prototype = Person.prototype;
+// Scope
 
-Enemy.prototype.sayName = function() {
-  console.log("HAHAHAHAHAHA");
-};
+// function outer(){
+//   const outerVar = `hey I am an outer var`
+//   return function inner(){
+//     const innerVar = `Hey I am an inner var`
+//     console.log(innerVar)
+//     console.log(outerVar)
 
-const carl = new Player("carl", "X");
-carl.sayName();
-console.log(carl.marker)
-const rick = new Enemy(`Rick`)
-rick.sayName()
-console.log(rick.marker)
-// SafeGuarding Constructors
-// Why: throws error if new keyword isnt used to create an object
-//  if (!new.target) {
-// throw Error("You must use the 'new' operator to call the constructor");
 //   }
+// }
+// const innerFn = outer()
+// innerFn()
+
+function createGreeting(greeting = "") {
+  const myGreet = greeting.toUpperCase();
+
+  return function(name) {
+    return `${myGreet} ${name}`;
+  };
+}
+const sayHello = createGreeting('hello');
+const sayHey = createGreeting('hey');
