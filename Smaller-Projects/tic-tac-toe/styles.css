@@ -52,3 +52,38 @@ h1, h2, h3, h4, h5, h6 {
 Write your code below
 ======================= 
 */
+
+body{
+    height:98vh;
+}
+#Start,#Restart{
+    height: 30px;
+    width: 80px;
+}
+#Start{
+    color:white;
+    background-color: rgb(83, 172, 32);
+}
+#Restart{
+    color:black;
+    background-color: rgb(173, 173, 173);
+    visibility: hidden;
+
+}
+.container{
+    height:300px;
+    width:300px;
+
+    display:grid;
+    grid-template-columns: repeat(3,1fr) ;
+    grid-template-rows: repeat(3,1fr);
+    gap:5px;
+
+    background-color: rgb(201, 200, 200);
+}
+.cell{
+    background-color: rgba(255, 127, 80, 0.671) ;
+}
+.cell:hover{
+    background-color:rgba(255, 127, 80, 0.89)  ;
+}
