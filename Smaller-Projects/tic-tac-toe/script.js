@@ -10,6 +10,7 @@ function Cell(){
 function Gameboard(){
     // Creating a 2d array using nested loop
     // Each individual cell can getValue and setTag
+
     const rows = 3
     const columns = 3
     let board = []
@@ -19,6 +20,7 @@ function Gameboard(){
             board[i].push(Cell())
         }
     }
+
     const placeTag = (row,col,player)=>{
             board[row][col].setTag(player)
     }
@@ -57,7 +59,7 @@ function Gameboard(){
             && board[row][1].getValue() === value 
             && board[row][2].getValue() === value){
                 
-                isWon = `Won at row ${row}`
+                isWon = `${player.name} Won at row ${row}`
             }
         })()
         const winCol = (() => {
@@ -66,7 +68,7 @@ function Gameboard(){
             && board[1][col].getValue() === value 
             && board[2][col].getValue() === value){
                 
-                isWon = `Won at column ${col}`
+                isWon = `${player.name} Won at column ${col}`
             }
         })()
         const winDiagonal = (() => {
@@ -75,13 +77,13 @@ function Gameboard(){
             && board[1][1].getValue() === value 
             && board[2][2].getValue() === value){
 
-                isWon = `Won at diagonal downwards left to right`
+                isWon = `${player.name} Won at diagonal downwards left to right`
             } 
             else if(board[0][2].getValue() === value 
             && board[1][1].getValue() === value 
             && board[2][0].getValue() === value){
 
-                isWon = `Won at diagonal upwards left to right`
+                isWon = `${player.name} Won at diagonal upwards left to right`
             }
         })()
         if(isWon !== ''){
@@ -165,7 +167,6 @@ const playRound = (first = `Player One`, second = `Player Two`) =>{
 }
 
 // THOSE ARE GLOBAL SCOPED
-const play = playRound()
 const populateBoard = () => {
     const container = document.querySelector(`.container`)
     const cell = (row,col) => {
@@ -194,131 +195,34 @@ const restartBtn = document.querySelector(`#Restart`)
 startBtn.addEventListener('click',(event) =>{
     startBtn.style.visibility = `hidden`
     restartBtn.style.visibility = `visible`
+    const playerOne = document.querySelector(`#first-player-name`)
+    const playerTwo = document.querySelector(`#second-player-name`)
 
+    let play = playRound(playerOne.value,playerTwo.value)
     populateBoard()
+
     restartBtn.addEventListener(`click`, (event)=>{
         startBtn.style.visibility = `visible`
         restartBtn.style.visibility = `hidden`
         removeCells()
+        play = null
     })
+
+    const container = document.querySelector(`.container`)
+    container.addEventListener(`click`,(event) =>{
+    const cell = event.target.closest(`.cell`)
+    row = cell.dataset.rowId
+    col = cell.dataset.colId
+    play.play(row,col)
+})
 })
 
 // remembered a click parent and using event.target.closet in the library project
 // since cells are created after page load, event listener to cells will no capture
-const container = document.querySelector(`.container`)
-container.addEventListener(`click`,(event) =>{
-    const cell = event.target.closest(`.cell`)
-    row = cell.dataset.rowId
-    col = cell.dataset.colId
 
-    play.play(row,col)
-})
 
-// function displayController(){
-//     // Populate cells with according row and col Ids
-//     const populateBoard = () => {
-//         const container = document.querySelector(`.container`)
-//         const cell = (row,col) => {
-//             let nestedCell = document.createElement('div')
-//             nestedCell.setAttribute(`class`,`cell`)
-//             // hyphen in html are converted to camel case when accessing in javascript
-//             // e.g setAttribute(data-row-id) === accessing (dataset.rowId)
-//             // additionally caps are converted to lower case from JS to HTML
-//             // setAttribute(`data-rowId`) === accessing (dataset.rowid)
-//             nestedCell.setAttribute(`data-row-id`,row)
-//             nestedCell.setAttribute(`data-col-id`,col)
-//             return nestedCell
-//         }
-//         for(let i = 0;i<3;i++){
-//             for(let j = 0;j<3;j++){
-//                 container.appendChild(cell(i,j))
-//             }
-//         }
-//     }
-
-//     const removeCells = ()=>{
-//         const cells = document.querySelectorAll(`.cell`)
-//         cells.forEach((cell, index)=>{
-//     // Initialising
-//     const startBtn = document.querySelector(`#Start`)
-//     const restartBtn = document.querySelector(`#Restart`)
-
-//     const control = Controller()
-    
-
-// // ------ Event Listeners ------ //
-
-// startBtn.addEventListener('click',(event) =>{
-//     startBtn.style.visibility = `hidden`
-//     restartBtn.style.visibility = `visible`
-
-//     const round = control.playRound()
-//     const display = displayController()
-
-//     display.populateBoard()
-//     const container = document.querySelector(`.container`)
-//     container.addEventListener(`click`,(event) =>{
-//         const cell = event.target.closest(`.cell`)
-//         if(!cell){return}
-//         round.play(display.getRow(),display.getCol())
-//     })
-
-//     restartBtn.addEventListener(`click`, (event)=>{
-//             startBtn.style.visibility = `visible`
-//             restartBtn.style.visibility = `hidden`
-//             display.removeCells()
-//         })
-//     })
-// }          cell.remove()
-//         })
-//     }
-
- 
-//     let row;
-//     let col;
-//     const getRow = ()=>{
-//         return row
-//     }
-//     const getCol = ()=>{
-//         return col
-//     }
-
-//     
-//    
-//     return{populateBoard,removeCells,getRow,getCol}
-// }
-// function playGame(){
-//     // Initialising
-//     const startBtn = document.querySelector(`#Start`)
-//     const restartBtn = document.querySelector(`#Restart`)
-
-//     const control = Controller()
-    
-
-// // ------ Event Listeners ------ //
-
-// startBtn.addEventListener('click',(event) =>{
-//     startBtn.style.visibility = `hidden`
-//     restartBtn.style.visibility = `visible`
-
-//     const round = control.playRound()
-//     const display = displayController()
-
-//     display.populateBoard()
-//     const container = document.querySelector(`.container`)
-//     container.addEventListener(`click`,(event) =>{
-//         const cell = event.target.closest(`.cell`)
-//         if(!cell){return}
-//         round.play(display.getRow(),display.getCol())
-//     })
-
-//     restartBtn.addEventListener(`click`, (event)=>{
-//             startBtn.style.visibility = `visible`
-//             restartBtn.style.visibility = `hidden`
-//             display.removeCells()
-//         })
-//     })
-// }
+// TODO create instance of the gameboard using IIFE/ module pattern
+// Hope this creates only instance of boards, allowing restart to do its job
 
 
 
