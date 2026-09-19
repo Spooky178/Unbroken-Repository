@@ -60,6 +60,13 @@ function Gameboard(){
             && board[row][2].getValue() === value){
                 
                 isWon = `${player.name} Won at row ${row}`
+// Coloring wining rows
+                for(let i = 0;i < 3;i++){
+                    let cell = 
+                    document.querySelector(`[data-row-id="${row}"][data-col-id="${i}"]`)
+                    cell.style.color = 'green'
+                }
+
             }
         })()
         const winCol = (() => {
@@ -67,8 +74,13 @@ function Gameboard(){
             if(board[0][col].getValue() === value 
             && board[1][col].getValue() === value 
             && board[2][col].getValue() === value){
-                
                 isWon = `${player.name} Won at column ${col}`
+// Coloring winning cols
+                for(let i = 0;i < 3;i++){
+                    let cell = 
+                    document.querySelector(`[data-row-id="${i}"][data-col-id="${col}"]`)
+                    cell.style.color = 'green'
+                }
             }
         })()
         const winDiagonal = (() => {
@@ -124,7 +136,6 @@ const playRound = (first = `Player One`, second = `Player Two`) =>{
     const playedCell = (row,col,player) => {
         // syntax was googled
         const cell = document.querySelector(`[data-row-id="${row}"][data-col-id="${col}"]`)
-        console.log(cell)
         if(player.value === 1){
             cell.textContent = `O`
         } else{
