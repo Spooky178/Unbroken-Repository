@@ -11,23 +11,6 @@ const bodyContainer = document.querySelector(`#body`)
 function checkRead(isRead){
     return `${isRead?`Read`:`Not read`}`
 }
-// ---> addBookToLibrary
-function idGenerator(){
-    // spliting to obtain a 4 digit number
-    let uuid = crypto.randomUUID().split('-')
-    let rng = Math.floor(Math.random() *3 + 1)
-    return uuid[rng]
-}
-function isIdUnique(array, uuid){
-    if(array.length === 0){
-        return true
-    }
-    // if element is not found array.some returns false === is Unique true
-    let isUnique = !array.some(book => { 
-        book.id === uuid
-    })
-    return isUnique   
-}
 
 // ---> createBookDisplay
 function cardParaMaker(){
@@ -35,6 +18,7 @@ function cardParaMaker(){
     p.setAttribute(`class`,`card-content`)
     return p
 }
+// Please look into README - 'TO GET MORE PRACTICE' part
 function createDeleteButton(book){
     const deleteBtn = document.createElement(`button`)
     deleteBtn.setAttribute(`class`,`delete`)
@@ -49,23 +33,13 @@ function setCardContent(book){
         para[2].textContent = `Pages : ${book.pageCount}`
         para[3].textContent = `Status : ${checkRead(book.isRead)}`
         return para
-        
 }
 function createReadToggler(isRead,uuid){
     const toggler = document.createElement(`button`)
     toggler.setAttribute(`class`,`toggle`)
     toggler.setAttribute(`data-state`,checkRead(isRead))
     toggler.setAttribute(`data-id`,uuid)
-    toggler.textContent = ""
-    // const svg = document.createElement(`svg`)
-    // svg.setAttribute("xmlns", "http://www.w3.org/2000/svg")
-    // svg.setAttribute("viewBox", "0 0 24 24")
-    // const path = document.createElement(`path`)
-    // path.setAttribute('d',"M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z")
-    // svg.appendChild(path)
-    // alert(svg)
-    // toggler.textContent = svg
-
+    toggler.textContent = isRead?`Unread`:`Read`;
     return toggler
 }
 // ---> Submit Button
@@ -100,28 +74,77 @@ function cardPop(uuid){
 //Helper Functions End <---
 
 // ----- MAIN FUNCTION -----//
-// Book Constructor
-function Book(title, author, pageCount, isRead){
-    this.title = title;
-    this.author = author;
-    this.pageCount = pageCount
-    this.isRead = isRead;
-    this.info = function(){
-        return(`${this.title} by ${this.author}, ${this.pageCount} pages, ` + (checkRead(this.isRead)))
+
+class Book{
+    // Moved those two methods in here, they are only called in new book creation
+    #idGenerator(){
+        // spliting to obtain a 4 digit number
+        let uuid = crypto.randomUUID().split('-')
+        let rng = Math.floor(Math.random() *3 + 1)
+        return uuid[rng]
+    }
+    #isIdUnique(array, uuid){
+        if(array.length === 0){
+            return true
+        }
+        // if element is not found array.some returns false === is Unique true
+        let isUnique = !array.some(book => { 
+            book.id === uuid
+        })
+        return isUnique   
+    }
+
+    constructor(title, author, pageCount, isRead){
+        // Used an Module pattern, supposedly because it did not initially worked without
+        this.id = (() => {
+            let id;
+        // enters the loop once and verify if unique
+            do{
+                id = this.#idGenerator()
+            }while(this.#isIdUnique(myLibrary, id) === false)
+            return id
+        })();
+        this._title = title
+        this._author = author
+        this._pageCount = pageCount
+        this._isRead = isRead
+    }
+    
+    info() {
+    return(`${this.title} by ${this.author}, ${this.pageCount} pages, ` + (checkRead(this.isRead)))
+    }
+    get title(){
+        return this._title
+    }
+    get author(){
+        return this._author
+    }
+    get pageCount(){
+        return this._pageCount
+    }
+    get isRead(){
+        return this._isRead
+    }
+
+    set title(value){
+        this._title = value
+    }
+    set author(value){
+        this._author = value
+    }
+    set pageCount(value){
+        this._pageCount = value
+    }
+    set isRead(bool){
+        this._isRead = bool
     }
 }
+
 function addBookToLibrary(title,author,pageCount,isRead){
     let myBook = new Book(title,author,pageCount,isRead)
-    let id;
-    // enters the loop once and verify if unique
-    do{
-        id = idGenerator()
-    }while(isIdUnique(myLibrary, id) === false)
-    myBook[`id`] = id
     myLibrary.push(myBook)
     createBookDisplay(myBook)
     deleteBtn = document.querySelectorAll(`.delete`)
-
 }
 // Rework this part of code BELOW > done
 function createBookDisplay(book){
@@ -133,13 +156,16 @@ function createBookDisplay(book){
     container.setAttribute(`class`,`book-holder`)
     const headerId = document.createElement(`h2`)
     headerId.textContent = book.id
+
     // --- First add top header and container to global variable bodyContainer
     card.appendChild(headerId)
     card.appendChild(container)
     bodyContainer.appendChild(card)
+
     // ---- Second add content to card > container
     const contentArray = setCardContent(book)
     contentArray.forEach((element) => container.appendChild(element));
+
     // Third add last row with buttons
     const buttonBar = document.createElement(`div`)
     buttonBar.setAttribute('class', 'card-button-bar')
@@ -150,7 +176,7 @@ function createBookDisplay(book){
 
 }
 
-// ------------------------------------------------------------
+// ------------------------------------------------------------ //
 
 
 // ----- EVENT LISTENERS ----- //
@@ -218,9 +244,10 @@ bodyContainer.addEventListener("click",(event)=>{
         // invert read in library - Below
         let index = myLibrary.findIndex(book => book.id === uuid)
         let read = myLibrary[index].isRead
-        myLibrary[index].isRead = !read        
+        myLibrary[index].isRead = !read
+
+        toggleBtn.textContent = (!read?`Unread`:`Read`)
     }
-// const secondItem = document.querySelector('#myList li:nth-child(2)');
 })
 
 // Event Listeners End <---
